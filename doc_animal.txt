@@ -1,0 +1,147 @@
+Recurso: Animal
+
+    ATRIBUTOS:
+        _ID <gerado> <leitura>
+        DONO <gerado> <leitura>
+        NOME <obrigatório>
+        IDADE <obrigatório>
+        TIPO <obrigatório>
+        RACA <obrigatório>
+        SEXO <obrigatório>
+        ADOCAO <obrigatório>
+        DESCRICAO <opcional>
+
+    JSON SCHEMAS (DTOs):
+        Schema:
+            Identificardor: Get_schema_animal
+            Propriedades: 
+                {
+                    “_id”: {“type”: "objectid"},
+                    “dono”: {“type”: “objectid”},
+                    “nome”: {“type”: “string”},
+                    “idade”: {“type”: “string”},
+                    “tipo”: {“type”: “string”},
+                    “sexo”: {“type”: “string”},
+                    “aodocao”: {“type”: “boolean”},
+                    “descricao”: {“type”: “string”}
+                }
+        Schema:
+            Identificador: Post_schema_animal
+            Propriedades: 
+                {
+                    “nome”: {“type”: “string”},
+                    “idade”: {“type”: “string”},
+                    “tipo”: {“type”: “string”},
+                    “sexo”: {“type”: “string”},
+                    “adocao": {“type”: “boolean”},
+                    “descricao”: {“type”: “string”}
+                }
+
+    PATHS:
+        Path: /animal
+            POST
+                Sumário: Criar perfil de animal
+                Segurança: Público
+                Body: 
+                    Post_schema_animal
+                Respostas:
+                    201
+                        Descrição: Created
+                        Body: 
+                            {
+                                “status”: 201,
+                                “mensagem”: “perfil de animal criado!”
+                            }
+            GET
+                Sumário: Sumário: Listar todos os usuários
+                Segurança: BearerAuth: [Admin]
+                Filtros:
+                    [id, nome, username, email]
+                Responses:
+                    200
+                        Descrição: OK
+                        Body:
+                            Array<get_schema_user_detailed>
+                    401
+                        Descrição: Não Logado <Unauthorized>
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Proibido <Forbidden>
+                        Body:
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
+
+        Path: /animal:id
+            GET
+                Sumário: Mostrar perfil de animal por ID
+                Segurança: 
+                    BearerAuth: [Owner, Admin]
+                Respostas:
+                    200
+                        Descrição: OK
+                        Body:
+                            Get_schema_animal
+                    401
+                        Descrição: Unauthorized
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Proibido <Forbbiden>
+                        Body
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
+
+            DELETE
+                Sumário: Remover usuário
+                Segurança: 
+                    BearerAuth: [Admin]
+                Respostas:
+                    204
+                        Descrição: No Content
+                    401
+                        Descrição: Unauthorized
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Proibido <Forbbiden>
+                        Body:
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
+
+            PATCH
+                Sumário: Atualizar perfil de usuário
+                Segurança: 
+                    BearerAuth: [User, Admin]
+                Respostas:
+                    204
+                        Descrição: No Content
+                    401
+                        Descrição: Não Logado <Unauthorized>
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Proibido <Forbbiden>
+                        Body:
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
