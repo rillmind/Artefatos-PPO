@@ -76,6 +76,31 @@ Recurso: Animal
                                 “status”: 403,
                                 “mensagem”: “Usuário não tem permissão!”
                             }
+                            
+        Path: /animal/mypets
+            GET
+                Sumário: Mostrar pets do usuário logado
+                Segurança:
+                    BearerAuth: [Owner]
+                Respostas:
+                    200
+                        Descrição: OK
+                        Body:
+                            Array<Get_schema_animal>
+                    401
+                        Descrição: Unauthorized
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Proibido <Forbbiden>
+                        Body
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
 
         Path: /animal:id
             GET
