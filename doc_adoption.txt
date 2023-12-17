@@ -48,16 +48,16 @@ Recurso: Adoção
                         Descrição: OK
                         Body:
                     401
-						Descrição: Unauthorized
-						Body: 
-							{
-								“status”: 401,
-								“mensagem”: “Usuário não logado!”
-							}
-					403
-						Descrição: Forbidden
-						Body: 
-							{
-								“status”: 403,
-								“mensagem”: “Acesso negado!”
-							}
+                        Descrição: Unauthorized
+                        Body: 
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Forbidden
+                        Body: 
+                            {
+                                “status”: 403,
+                                “mensagem”: “Acesso negado!”
+                            }
