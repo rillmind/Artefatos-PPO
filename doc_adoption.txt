@@ -1,0 +1,63 @@
+Recurso: Adoção
+	ATRIBUTOS:
+        ID <gerado> <leitura>
+        PET <obrigatório>
+        OWNER <obrigatório>
+        ADOPTER <gerado> <leitura>
+        DESCRICAO <opcional>
+
+	JSON SCHEMAS (DTOs):
+        Schema
+            Identificardor: Get_schema_adoption
+            Propriedades: 
+                {
+                    “id”: {“type”: “string”},
+                    “pet”: {“type”: “string”},
+                    “owner”: {“type”: “string”},
+                    "adopter": {“type”: “string”},
+                    “descricao”: {“type”: “string”},
+                }
+        Schema
+            Identificador: Post_schema_adoption
+            Propriedades: 
+                {
+                    “pet”: {“type”: “string”},
+                    “owner”: {“type”: “string”},
+                    “descricao”: {“type”: “string”},
+                }
+
+	PATHS:
+        Path: /doar
+            POST
+                Sumário: Doar animal
+                Segurança: 
+                    BearerAuth: [Owner, Admin]
+                Body: 
+                    Post_schema_adoption
+                Respostas:
+                    204
+                        Descrição: No Content
+            PATCH
+                Sumário: Aceitar Adoção
+                Segurança:
+                    BearerAuth: [Owner]
+                Body:
+                    Get_schema_adoption
+                Respostas:
+                    200		
+                        Descrição: OK
+                        Body:
+                    401
+						Descrição: Unauthorized
+						Body: 
+							{
+								“status”: 401,
+								“mensagem”: “Usuário não logado!”
+							}
+					403
+						Descrição: Forbidden
+						Body: 
+							{
+								“status”: 403,
+								“mensagem”: “Acesso negado!”
+							}

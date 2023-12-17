@@ -2,8 +2,8 @@ Recurso: Post
 
 	Atributos:
 		_ID <gerado> <leitura>
-		USUARIO <gerado> <leitura>
-		ANIMAL <opções> <opcional>
+		USUARIO <leitura>
+		ANIMAL <leitura>
 		DESCRICAO <opcional>
 		IMG <opcional>
 		LIKE <opcional>

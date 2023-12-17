@@ -1,0 +1,204 @@
+Recurso: Usuário
+
+    ATRIBUTOS:
+        _ID <gerado> <leitura>
+        NOME <obrigatório>
+        USERNAME <único> <obrigatório>
+        EMAIL <único> <obrigatório>
+        SENHA <omitido> <obrigatório>
+        CPF_OU_CNPJ <único> <opcional>
+        TELEFONE <opcional>
+        DATA_DE_NASCIMENTO <opcional>
+        BIOGRAFIA <opcional>
+        CEP <opcional>
+        ESTADO <opcional>
+        CIDADE <opcional>
+        BAIRRO <opcional>
+        RUA <opcional>
+        NUMERO <opcional>
+
+    JSON SCHEMAS (DTOs):
+        Schema:
+            Identificador: Post_schema_user
+            Propriedades:
+                {
+                    “nome”: {“type”: “string”},
+                    “username”: {“type”: “string”},
+                    “email”: {“type”: “string”},
+                    “senha”: {“type”: “string”}
+                }
+        Schema:
+            Identificador: Get_schema_user
+            Propriedades:
+                {
+                    “_id”: {“type”: “ObjectId”},
+                    “nome”: {“type”: “string”},
+                    “username”: {“type”: “string”},
+                    “email”: {“type”: “string”},
+                    “cpf_ou_cnpj”: {“type”: “string”},
+                    “telefone”: {“type”: “string”},
+                    “data_de_nascimento”: {“type”: “string”},
+                    “biografia”: {“type”: “string”},
+                    “CEP”: {“type”: “string”},
+                    “estado”: {“type”: “string”},
+                    “cidade”: {“type”: “string”},
+                    “bairro”: {“type”: “string”},
+                    “rua”: {“type”: “string”},
+                    “numero”: {“type”: “string”},
+                }
+        Schema
+            Identificador: Patch_schema_user
+            Propriedades:
+                {
+                    “nome”: {“type”: “string”},
+                    “username”: {“type”: “string”},
+                    “email”: {“type”: “string”},
+                    “cpf_ou_cnpj”: {“type”: “string”},
+                    “telefone”: {“type”: “string”},
+                    “data_de_nascimento”: {“type”: “string”},
+                    “CEP”: {“type”: “string”},
+                    “estado”: {“type”: “string”},
+                    “cidade”: {“type”: “string”},
+                    “bairro”: {“type”: “string”},
+                    “rua”: {“type”: “string”},
+                    “numero”: {“type”: “string”},
+                }
+
+    PATHS:
+        Path: /user
+            GET:
+                Sumário: Listar todos os usuários
+                Segurança: 
+                    BearerAuth: [Admin]
+                Respostas:
+                    200		
+                        Descrição: OK
+                        Body:
+                            Array<get_schema_user_detailed>
+                    401
+                        Descrição: Não Logado <Unauthorized>
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Forbidden
+                        Body:
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
+            POST:
+                Sumário: Cadastrar Usuário
+                Segurança: 
+                    Público
+                Body:
+                    post_schema_user
+                Respostas:
+                    201
+                        Descrição: Created
+                        Body:
+                            Get_schema_user
+                    409
+                        Descrição: Conflict Error
+                        Body:
+                            {
+                                “satatus”: 409,
+                                “mensagem”: “email ou username já existentes!”
+                            }   
+                    401
+                        Descrição: Não Logado <Unauthorized>
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Proibido <Forbbiden>
+                        Body
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
+                    422
+                        Descrição: Validation Erro
+                        Body:
+                            {
+                                “status”: 422,
+                                “mensagem”: “erro de sintaxe!”
+                            }
+
+            Path: /user/:id
+                GET:
+                    Sumário: Detalhar usuário
+                    Segurança:
+                        BearerAuth: [User, Admin]
+                    Respostas:
+                        200
+                            Descrição: OK
+                            Body: 
+                                get_schema_user_detailed
+                        401
+                            Descrição: Unauthorized
+                            Body:
+                                {
+                                    “status”: 401,
+                                    “mensagem”: “Usuário não logado!”
+                                }
+                        403
+                            Descrição: Forbbiden
+                            Body
+                                {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                                }
+                        404
+                            Descrição: Perfil não encontrado <Not Found>
+                            Body: 
+                                {
+                                    “status”: 404
+                                    “mensagem": “Usuário não encontrado!”
+                                }
+                DELETE:
+                    Sumário: Remover usuário
+                    Segurança:
+                        BearerAuth: [Admin]
+                    Respostas:
+                        204
+                            Descrição: No Content  
+                        401
+                            Descrição: Unauthorized
+                            Body:
+                                {
+                                    “status”: 401,
+                                    “mensagem”: “Usuário não logado!”
+                                }
+                        403
+                            Descrição: Forbbiden
+                            Body:
+                                {
+                                    “status”: 403,
+                                    “mensagem”: “Usuário não tem permissão!”
+                                }
+                PATCH:
+                    Sumário: Atualizar perfil de usuário
+                    Segurança:
+                        BearerAuth: [User, Admin]
+                    Respostas:
+                        204
+                            Descrição: No Content
+                        401
+                            Descrição: Não Logado <Unauthorized>
+                            Body:
+                                {
+                                    “status”: 401,
+                                    “mensagem”: “Usuário não logado!”
+                                }
+                        403
+                            Descrição: Forbbiden
+                            Body:
+                                {
+                                    “status”: 403,
+                                    “mensagem”: “Usuário não tem permissão!”
+                                }
