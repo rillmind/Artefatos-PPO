@@ -28,6 +28,34 @@ Recurso: Usuário
                     “senha”: {“type”: “string”}
                 }
         Schema:
+            Identificador: Patch_schema_user
+            Propriedades:
+                {
+                    “nome”: {“type”: “string”},
+                    “username”: {“type”: “string”},
+                    “email”: {“type”: “string”},
+                }
+        Schema:
+            Identificador: Patch_schema_user_pass
+            Propriedades:
+                {
+                    “senha”: {“type”: “string”}
+                }
+        Schema
+            Identificador: Patch_schema_user_data
+            Propriedades:
+                {
+                    “cpf_ou_cnpj”: {“type”: “string”},
+                    “telefone”: {“type”: “string”},
+                    “data_de_nascimento”: {“type”: “string”},
+                    “CEP”: {“type”: “string”},
+                    “estado”: {“type”: “string”},
+                    “cidade”: {“type”: “string”},
+                    “bairro”: {“type”: “string”},
+                    “rua”: {“type”: “string”},
+                    “numero”: {“type”: “string”},
+                }
+        Schema:
             Identificador: Get_schema_user
             Propriedades:
                 {
@@ -39,23 +67,6 @@ Recurso: Usuário
                     “telefone”: {“type”: “string”},
                     “data_de_nascimento”: {“type”: “string”},
                     “biografia”: {“type”: “string”},
-                    “CEP”: {“type”: “string”},
-                    “estado”: {“type”: “string”},
-                    “cidade”: {“type”: “string”},
-                    “bairro”: {“type”: “string”},
-                    “rua”: {“type”: “string”},
-                    “numero”: {“type”: “string”},
-                }
-        Schema
-            Identificador: Patch_schema_user
-            Propriedades:
-                {
-                    “nome”: {“type”: “string”},
-                    “username”: {“type”: “string”},
-                    “email”: {“type”: “string”},
-                    “cpf_ou_cnpj”: {“type”: “string”},
-                    “telefone”: {“type”: “string”},
-                    “data_de_nascimento”: {“type”: “string”},
                     “CEP”: {“type”: “string”},
                     “estado”: {“type”: “string”},
                     “cidade”: {“type”: “string”},

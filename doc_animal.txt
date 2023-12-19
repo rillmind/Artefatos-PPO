@@ -21,6 +21,7 @@ Recurso: Animal
                     “nome”: {“type”: “string”},
                     “idade”: {“type”: “string”},
                     “tipo”: {“type”: “string”},
+                    “raca”: {“type”: “string”},
                     “sexo”: {“type”: “string”},
                     “aodocao”: {“type”: “boolean”},
                     “descricao”: {“type”: “string”}
@@ -32,6 +33,7 @@ Recurso: Animal
                     “nome”: {“type”: “string”},
                     “idade”: {“type”: “string”},
                     “tipo”: {“type”: “string”},
+                    “raca”: {“type”: “string”},
                     “sexo”: {“type”: “string”},
                     “adocao": {“type”: “boolean”},
                     “descricao”: {“type”: “string”}
@@ -48,12 +50,16 @@ Recurso: Animal
                     201
                         Descrição: Created
                         Body: 
+                            Get_schema_animal
+                    422
+                        Descrição: Unprossable Entity
+                        Body: 
                             {
-                                “status”: 201,
-                                “mensagem”: “perfil de animal criado!”
+                                “status”: 422,
+                                “mensagem”: “Erro de validação.”
                             }
             GET
-                Sumário: Sumário: Listar todos os usuários
+                Sumário: Listar todos os animais
                 Segurança: BearerAuth: [Admin]
                 Filtros:
                     [id, nome, username, email]
@@ -63,14 +69,14 @@ Recurso: Animal
                         Body:
                             Array<get_schema_user_detailed>
                     401
-                        Descrição: Não Logado <Unauthorized>
+                        Descrição: Unauthorized
                         Body:
                             {
                                 “status”: 401,
                                 “mensagem”: “Usuário não logado!”
                             }
                     403
-                        Descrição: Proibido <Forbidden>
+                        Descrição: Forbidden
                         Body:
                             {
                                 “status”: 403,
@@ -95,7 +101,7 @@ Recurso: Animal
                                 “mensagem”: “Usuário não logado!”
                             }
                     403
-                        Descrição: Proibido <Forbbiden>
+                        Descrição: Forbbiden
                         Body
                             {
                                 “status”: 403,
@@ -120,8 +126,30 @@ Recurso: Animal
                                 “mensagem”: “Usuário não logado!”
                             }
                     403
-                        Descrição: Proibido <Forbbiden>
+                        Descrição: Forbbiden
                         Body
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
+                            }
+
+            PATCH
+                Sumário: Atualizar perfil de usuário
+                Segurança: 
+                    BearerAuth: [User, Admin]
+                Respostas:
+                    204
+                        Descrição: No Content
+                    401
+                        Descrição: Unauthorized
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Forbbiden
+                        Body:
                             {
                                 “status”: 403,
                                 “mensagem”: “Usuário não tem permissão!”
@@ -142,29 +170,7 @@ Recurso: Animal
                                 “mensagem”: “Usuário não logado!”
                             }
                     403
-                        Descrição: Proibido <Forbbiden>
-                        Body:
-                            {
-                                “status”: 403,
-                                “mensagem”: “Usuário não tem permissão!”
-                            }
-
-            PATCH
-                Sumário: Atualizar perfil de usuário
-                Segurança: 
-                    BearerAuth: [User, Admin]
-                Respostas:
-                    204
-                        Descrição: No Content
-                    401
-                        Descrição: Não Logado <Unauthorized>
-                        Body:
-                            {
-                                “status”: 401,
-                                “mensagem”: “Usuário não logado!”
-                            }
-                    403
-                        Descrição: Proibido <Forbbiden>
+                        Descrição: Forbbiden
                         Body:
                             {
                                 “status”: 403,

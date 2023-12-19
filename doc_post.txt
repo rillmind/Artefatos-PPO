@@ -3,7 +3,7 @@ Recurso: Post
 	Atributos:
 		_ID <gerado> <leitura>
 		USUARIO <leitura>
-		ANIMAL <leitura>
+		PET <leitura>
 		DESCRICAO <opcional>
 		IMG <opcional>
 		LIKE <opcional>
@@ -14,19 +14,20 @@ Recurso: Post
 			Propriedades:
 				{
 					“_id”: {“type”: “ObjectId”},
-					"usuario": {"type": "ObjectId"},
-					"animal": {"type": "ObjectId"},
-					"descricao": {"type": "string"},
+					"pet": {"type": "ObjectId"},
 					"img": {"type": "?"},
 					"like": {"type": "boolean"},
+					"usuario": {"type": "ObjectId"},
+					"descricao": {"type": "string"},
 				}
 		
 		Schema:
 			Identificador: Post_schema_post
 			Propriedades:
 				{
+					"pet": {"type": "string"},
+					"img": {"type": "string"},
 					"descricao": {"type": "string"},
-					"img": {"type": "?"},
 				}
 
 	PATHS:

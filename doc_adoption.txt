@@ -27,26 +27,30 @@ Recurso: Adoção
                 }
 
 	PATHS:
-        Path: /doar
+        Path: /adoption
             POST
                 Sumário: Doar animal
                 Segurança: 
-                    BearerAuth: [Owner, Admin]
+                    BearerAuth: [User, Admin]
                 Body: 
                     Post_schema_adoption
                 Respostas:
                     204
                         Descrição: No Content
+                    401
+                        Descrição: Unauthorized
+                        Body: 
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
             PATCH
                 Sumário: Aceitar Adoção
                 Segurança:
                     BearerAuth: [Owner]
-                Body:
-                    Get_schema_adoption
                 Respostas:
-                    200		
-                        Descrição: OK
-                        Body:
+                    204		
+                        Descrição: NO CONTENT
                     401
                         Descrição: Unauthorized
                         Body: 
@@ -60,4 +64,25 @@ Recurso: Adoção
                             {
                                 “status”: 403,
                                 “mensagem”: “Acesso negado!”
+                            }
+            DELETE
+                Sumário: Recusar adoção
+                Segurança: 
+                    BearerAuth: [Owner]
+                Respostas:
+                    204
+                        Descrição: No Content
+                    401
+                        Descrição: Unauthorized
+                        Body:
+                            {
+                                “status”: 401,
+                                “mensagem”: “Usuário não logado!”
+                            }
+                    403
+                        Descrição: Forbbiden
+                        Body:
+                            {
+                                “status”: 403,
+                                “mensagem”: “Usuário não tem permissão!”
                             }

@@ -25,12 +25,12 @@ Recurso: Login
 						Descrição: OK
 						Body:
 							Post_schema_login
-					400
+					422
 						Descrição: Bad request
 						Body: 
 							{
-								“status”: 400,
-								“mensagem”: “Erro de sintaxe!”
+								“status”: 422,
+								“mensagem”: “Erro de validação.”
 							}
 			GET
 				Sumário: Retornar Usuário logado
