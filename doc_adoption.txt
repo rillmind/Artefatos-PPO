@@ -86,3 +86,4 @@ Recurso: Adoção
                                 “status”: 403,
                                 “mensagem”: “Usuário não tem permissão!”
                             }
+        p
